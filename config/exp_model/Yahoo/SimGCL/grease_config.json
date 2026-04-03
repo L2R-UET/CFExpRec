@@ -1,0 +1,8 @@
+﻿{
+    "surrogate_epochs":  500,
+    "surrogate_lr":  0.01,
+    "perturb_epochs":  300,
+    "perturb_lr":  0.1,
+    "alpha_grease":  0.001,
+    "nhid":  800
+}

@@ -1,0 +1,18 @@
+{
+    "fixSteps": 2,
+    "reg": 1e-5,
+    "ssl_reg": 1,
+    "gcn_layers": 2,
+    "sub": 0.1,
+    "keepRate": 0.9,
+    "ext": 0.5,
+    "reRate": 0.8,
+    "addRate": 0.01,
+    "ctra": 1e-3,
+    "b2": 1,
+    "pnn_layers": 1,
+    "anchor_set_num": 32,
+    "latent_dim": 64,
+    "head": 4,
+    "gtw": 0.1
+}

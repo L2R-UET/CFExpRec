@@ -1,0 +1,9 @@
+{
+    "dims": [200, 600],
+    "time_type": "cat",
+    "mean_type": "x0",
+    "steps": 40,
+    "noise_schedule": "linear-var",
+    "noise_scale": 0.005,
+    "noise_max": 0.01
+}

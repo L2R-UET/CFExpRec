@@ -1,0 +1,10 @@
+﻿{
+    "n_samples":  150,
+    "kernel_width":  null,
+    "num_features":  10,
+    "min_pert":  50,
+    "max_pert":  100,
+    "feature_selection":  "highest_weights",
+    "random_state":  null,
+    "verbose":  false
+}

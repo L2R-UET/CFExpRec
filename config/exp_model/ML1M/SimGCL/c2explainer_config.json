@@ -1,0 +1,6 @@
+{
+    "add_edges": false,
+    "silent": true,
+    "lr": 0.1,
+    "epochs": 50
+}

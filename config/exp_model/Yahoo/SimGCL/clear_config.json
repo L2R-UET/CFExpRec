@@ -1,0 +1,8 @@
+{
+    "latent_dim": 64,
+    "dim_z": 16,
+    "dropout": 0.0,
+    "lr": 0.001,
+    "weight_decay": 1e-5,
+    "epochs": 100
+}

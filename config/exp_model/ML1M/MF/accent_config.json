@@ -1,0 +1,5 @@
+﻿{
+    "damping":  1E-06,
+    "cg_iters":  100,
+    "hvp_batch_size":  4096
+}
