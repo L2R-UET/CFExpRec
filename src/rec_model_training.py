@@ -69,7 +69,7 @@ if __name__ == "__main__":
     rec_model_name_lower = args.model.lower().replace("-", "").replace("_", "")
     config_path = args.config if args.config else f"config/rec_model/{args.dataset}/{rec_model_name_lower}_config.json"
     if Path(config_path).exists():
-        with open(config_path, "r") as f:
+        with open(config_path, "r", encoding="utf-8-sig") as f:
             rec_model_config = json.load(f)
     else:
         rec_model_config = dict()

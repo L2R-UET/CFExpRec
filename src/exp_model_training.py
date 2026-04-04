@@ -67,7 +67,7 @@ if __name__ == "__main__":
 
     rec_model_name_lower = args.rec_model.lower().replace("-", "").replace("_", "")
     rec_config_path = args.rec_config if args.rec_config else f"config/rec_model/{args.dataset}/{rec_model_name_lower}_config.json"
-    with open(rec_config_path, "r") as f:
+    with open(rec_config_path, "r", encoding="utf-8-sig") as f:
         rec_model_config = json.load(f)
     rec_model = REC_MODEL_REGISTRY[args.rec_model](data, device, args, config=rec_model_config, explain=True)
 
@@ -80,7 +80,7 @@ if __name__ == "__main__":
     exp_model_name_lower = args.exp_model.lower().replace("-", "").replace("_", "")
     exp_config_path = args.exp_config if args.exp_config else f"config/exp_model/{args.dataset}/{args.rec_model}/{exp_model_name_lower}_config.json"
     if Path(exp_config_path).exists():
-        with open(exp_config_path, "r") as f:
+        with open(exp_config_path, "r", encoding="utf-8-sig") as f:
             exp_model_config = json.load(f)
     else:
         exp_model_config = dict()
