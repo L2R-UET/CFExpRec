@@ -53,9 +53,6 @@ class ACCENT(UserVectorExpBaseModel):
         return hasattr(self.rec_model, 'diffusion') and hasattr(self.rec_model, 'model') and hasattr(self.rec_model, 'sampling_steps')
 
     def get_implicit_explanation(self, user_id, item_ids, **kwargs):
-        if isinstance(item_ids, list) and len(item_ids) > 1:
-            raise ValueError("ACCENT does not support list-level implicit explanation. Please use item-level explanation.")
-            
         user_interaction = self.get_historical_interactions(torch.tensor([user_id], device=self.device), item_ids)
         user_interactions_t = user_interaction.unsqueeze(0)
 
@@ -81,18 +78,17 @@ class ACCENT(UserVectorExpBaseModel):
                 values = torch.tensor(influences_matrix[i], device=self.device, dtype=torch.float32)
                 scores_matrix[i, indices] = -values
 
-        scores_tensor = scores_matrix.squeeze(0)
+        scores_tensor = scores_matrix.mean(dim=0)
         
-        mask = torch.zeros_like(scores_tensor)
-        mask[..., history_indices] = 1.0
+        mask = torch.zeros(self.n_items, device=self.device)
+        mask[history_indices] = 1.0
         scores_tensor = scores_tensor * mask
-        scores_tensor[(mask > 0) & (scores_tensor <= 0)] = 1e-9
         
         return scores_tensor
 
     def get_explicit_explanation(self, user_id, item_ids, **kwargs):
         if isinstance(item_ids, list) and len(item_ids) > 1:
-            raise ValueError("ACCENT does not support collective list-level explicit explanation. Please set level='item'.")
+            return torch.zeros(self.n_items, device=self.device)
             
         user_interaction = self.get_historical_interactions(torch.tensor([user_id], device=self.device), item_ids)
         user_interactions_t = user_interaction.unsqueeze(0)

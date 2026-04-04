@@ -5,6 +5,7 @@ import pickle as pkl
 from tqdm import tqdm
 import os
 import sys
+import numpy as np
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -86,6 +87,8 @@ if __name__ == "__main__":
 
     exp_model = EXP_MODEL_REGISTRY[args.exp_model](rec_model, device, args, config=exp_model_config)
 
+    print(f"Evaluating {args.exp_model} on {args.dataset} with {args.rec_model} in {args.level}-level explanation and top-{args.top_k} recommendation.")
+
     if exp_model.mode == 'explicit' or exp_model.mode == 'hybrid':
         explicit_output_eval = []
         for _, batch in tqdm(enumerate(data.test_loader)):
@@ -121,6 +124,24 @@ if __name__ == "__main__":
                 "time": time,
             })
 
+        final_result = {
+            "pn_s": [],
+            "pn_r": [],
+            "#perturb": [],
+            "time": [],
+        }
+        for i in range(len(explicit_output_eval)):
+            for key in final_result:
+                value = explicit_output_eval[i][key]
+                if isinstance(value, list):
+                    final_result[key].extend(value)
+                else:
+                    final_result[key].append(value)
+
+        print(f"Final Explicit Performance:")
+        for key, values in final_result.items():
+            print(f"  {key.capitalize()}: {np.mean(values)} +- {np.std(values)}")
+
         with open(f"logs/{args.rec_model}_{args.exp_model}_{args.dataset}_top{args.top_k}_{args.level}_exp.pkl", "wb") as f:
             pkl.dump(explicit_output_eval, f)
 
@@ -133,22 +154,35 @@ if __name__ == "__main__":
             if args.level == 'item':
                 pos_p = [pos_p_one_instance(rec_model, exp_model.y_pred_indices[user_id].tolist(), cf_output[i], user_id, i) for i in range(len(cf_output))]
                 neg_p = [neg_p_one_instance(rec_model, exp_model.y_pred_indices[user_id].tolist(), cf_output[i], user_id, i) for i in range(len(cf_output))]
-                gini = []
-                for cf_out in cf_output:
-                    gini_input = cf_out.clone()
-                    gini_input[(gini_input < 0) & history_mask] = 1e-9
-                    gini.append(gini_one_instance(gini_input))
+                gini = [gini_one_instance(cf_output[i]) for i in range(len(cf_output))]
             else:
                 pos_p = pos_p_one_instance(rec_model, exp_model.y_pred_indices[user_id].tolist(), cf_output, user_id)
                 neg_p = neg_p_one_instance(rec_model, exp_model.y_pred_indices[user_id].tolist(), cf_output, user_id)
-                gini_input = cf_output.clone()
-                gini_input[(gini_input < 0) & history_mask] = 1e-9
-                gini = gini_one_instance(gini_input)
+                gini = gini_one_instance(cf_output)
             implicit_output_eval.append({
                 "pos_p": pos_p,
                 "neg_p": neg_p,
                 "gini": gini,
                 "time": time,
             })
+        
+        final_result = {
+            "pos_p": [],
+            "neg_p": [],
+            "gini": [],
+            "time": [],
+        }
+        for i in range(len(implicit_output_eval)):
+            for key in final_result:
+                value = implicit_output_eval[i][key]
+                if isinstance(value, list):
+                    final_result[key].extend(value)
+                else:
+                    final_result[key].append(value)
+
+        print("Final Implicit Performance:")
+        for key, values in final_result.items():
+            print(f"  {key.capitalize()}: {np.mean(values)} +- {np.std(values)}")
+
         with open(f"logs/{args.rec_model}_{args.exp_model}_{args.dataset}_top{args.top_k}_{args.level}_imp.pkl", "wb") as f:
             pkl.dump(implicit_output_eval, f)

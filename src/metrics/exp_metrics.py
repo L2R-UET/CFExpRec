@@ -115,6 +115,10 @@ def gini_one_instance(importance_scores):
     sp = importance_scores.to_sparse()
     m_s = sp.values().cpu().flatten()
     if len(m_s) == 0:
+        raise ValueError("The importance scores are all zero, Gini coefficient is undefined.")
+    if torch.max(m_s) != torch.min(m_s):
+        m_s = (m_s - torch.min(m_s)) / (torch.max(m_s) - torch.min(m_s))
+    else:
         return 0.0
     m_s_sorted, _ = torch.sort(m_s)
     n = len(m_s_sorted)
