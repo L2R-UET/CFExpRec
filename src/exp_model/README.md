@@ -4,7 +4,7 @@
 Inherit ```UserVectorExpBaseModel``` class for user vector as input, ```GraphExpBaseModel``` class for user-item graph as input (in ```base_model.py```).
 
 ## Compulsory components
-- In the ```__init__``` function, specify the explanation type: define ```self.mode``` as ```implicit```, ```explicit``` or ```hybrid``` (support both implicit and explicit). Provide the configuration under each JSON file under the ```config``` folder. That config will be passed through the ```config``` variable when explainer is initialized.
+- In the ```__init__``` function, specify the explanation type: define ```self.mode``` as ```implicit```, ```explicit``` or ```hybrid``` (support both implicit and explicit). Provide the configuration under each JSON file under the ```./config/exp_model``` folder. That config will be passed through the ```config``` variable when explainer is initialized.
 - Implement ```get_implicit_explanation``` function for implicit explanation, ```get_explicit_explanation``` function for explicit explanation. At the start of the function, specify the interaction scope via ```get_historical_interactions``` function:
 
 ```python
