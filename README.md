@@ -75,53 +75,37 @@ pip install -r requirements.txt
 ```
 
 ## Recommendation Model Training
-All recommendation models can be trained using:
+All recommendation models can be trained with the following command:
+
 ```bash
 python src/rec_model_training.py [arguments]
 ```
+in which ```[arguments]``` includes:
+- ```--model```: name of the recommender (MF, VAE, DiffRec, LightGCN, GFormer, SimGCL)
+- ```--dataset```: name of the dataset (Amazon, ML1M, Yahoo)
+- ```--epochs```: number of epochs during training
+- ```--lr```: learning rate
+- ```--batch_train```: batch size for training
+- ```--batch_test```: batch size for testing
 
-### 1. Amazon
-
-```bash
-python src/rec_model_training.py --model MF --dataset Amazon --epochs 100 --lr 0.01 --batch_train 64
-python src/rec_model_training.py --model VAE --dataset Amazon --epochs 200 --lr 0.001 --batch_train 1024
-python src/rec_model_training.py --model DiffRec --dataset Amazon --epochs 100 --lr 0.01 --batch_train 512 --batch_test 2048
-python src/rec_model_training.py --model LightGCN --dataset Amazon --epochs 100 --lr 0.01 --batch_train 256
-python src/rec_model_training.py --model GFormer --dataset Amazon --batch_train 1024 --lr 0.001 --epochs 100
-python src/rec_model_training.py --model SimGCL --dataset Amazon --batch_train 64 --lr 0.001
-```
-
-### 2. ML1M
-
-```bash
-python src/rec_model_training.py --model MF --dataset ML1M --epochs 100 --lr 0.001 --batch_train 2048 --batch_test 2048
-python src/rec_model_training.py --model VAE --dataset ML1M --epochs 120 --lr 0.001 --batch_train 2048 --batch_test 2048
-python src/rec_model_training.py --model DiffRec --dataset ML1M --epochs 30 --lr 0.001 --batch_train 512 --batch_test 2048
-python src/rec_model_training.py --model LightGCN --dataset ML1M --lr 0.01 --batch_train 2048
-python src/rec_model_training.py --model GFormer --dataset ML1M --batch_train 65536
-python src/rec_model_training.py --model SimGCL --dataset ML1M --batch_train 2048
-```
-
-### 3. Yahoo
-
-```bash
-python src/rec_model_training.py --model MF --dataset Yahoo --epochs 100 --lr 0.001 --batch_train 2048 --batch_test 2048
-python src/rec_model_training.py --model VAE --dataset Yahoo --epochs 120 --lr 0.001 --batch_train 2048 --batch_test 2048
-python src/rec_model_training.py --model DiffRec --dataset Yahoo --epochs 30 --lr 0.001 --batch_train 512 --batch_test 2048
-python src/rec_model_training.py --model LightGCN --dataset Yahoo --lr 0.01 --batch_train 2048
-python src/rec_model_training.py --model GFormer --dataset Yahoo --batch_train 65536
-python src/rec_model_training.py --model SimGCL --dataset Yahoo --batch_train 2048
-```
+If configuration changes for recommender training are required, please modify the settings in ```./config/rec_model``` folder. For reproducibility, we provide all recommendation model checkpoints in `checkpoints/` folder.
 
 ## Counterfactual Explanation Evaluation
 
 Run the following command to get evaluation logs for the explainer with the default configuration:
 
 ```bash
-python src/exp_model_training.py --exp_model XXX --rec_model YYY --dataset ZZZ --top_k {3/5} --level {item/list} --graph_perturb {full/khop/indirect/user_only}
+python src/exp_model_training.py [arguments]
 ```
+in which ```[arguments]``` includes:
+- ```--exp_model```: name of the counterfactual explainer
+- ```--rec_model```: name of the recommender
+- ```--dataset```: name of the dataset
+- ```--top_k```: top-k prediction to be evaluated (3/5)
+- ```--level```: evaluation level (item/list)
+- ```--graph_perturb```: perturbation level for graph-based explainer (full/khop/indirect/user_only)
 
-If configuration changes are required, please modify the settings in ```./config``` folder, where all default configurations are provided. All the evaluation logs will be stored under the ```./logs``` folder.
+If configuration changes for explainer training and inference are required, please modify the settings in ```./config/exp_model``` folder, where all default configurations are provided. All the evaluation logs will be stored under the ```./logs``` folder.
 
 ## Guide for Reproducibility
 Before running the below commands, please first generate the evaluation logs for all counterfactual explainers with the guide above.
@@ -155,10 +139,3 @@ python analysis/different_item_position.py --perturb_scope {vector/graph}
 ```bash
 python analysis/graph_perturb.py --level {item/list}
 ```
-
-
-## Notes
-- Ensure the recommendation model is trained before running explanation models.
-- For large-batch configurations (e.g., GFormer), sufficient GPU memory is required.
-- Results are logged via Weights & Biases.
-- For reproducibility, we provide all recommendation model checkpoints in `checkpoints/` folder.
