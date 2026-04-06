@@ -83,6 +83,7 @@ class ACCENT(UserVectorExpBaseModel):
         mask = torch.zeros(self.n_items, device=self.device)
         mask[history_indices] = 1.0
         scores_tensor = scores_tensor * mask
+        scores_tensor += user_interaction * 1e-12
         
         return scores_tensor
 

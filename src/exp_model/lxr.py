@@ -166,7 +166,7 @@ class LXR(UserVectorExpBaseModel):
         scores = expl_scores[0]
         history_mask = user_tensor[0] > 0
         scores_tensor = scores * history_mask.float()
-        scores_tensor[(history_mask) & (scores_tensor <= 0)] = 1e-9
+        scores_tensor += user_interaction * 1e-12
         
         return scores_tensor
 

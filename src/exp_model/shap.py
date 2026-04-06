@@ -168,5 +168,6 @@ class SHAP(UserVectorExpBaseModel):
         mask = torch.zeros_like(scores_tensor)
         mask[..., history_indices] = 1.0
         scores_tensor = scores_tensor * mask
+        scores_tensor += user_interaction * 1e-12
         
         return scores_tensor
