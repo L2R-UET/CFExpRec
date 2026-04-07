@@ -1,3 +1,8 @@
+'''
+Based on the original implementation of paper "A Counterfactual Framework for Learning and Evaluating Explanations for Recommender Systems"
+Original repository: https://github.com/DeltaLabTLV/LXR
+'''
+
 import torch
 import numpy as np
 import torch.nn as nn

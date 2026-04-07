@@ -1,3 +1,8 @@
+"""
+Based on the pseudo-code provided in the paper "Shap-enhanced counterfactual explanations forrecommendations"
+and the implementation from the LXR repository: https://github.com/DeltaLabTLV/LXR
+"""
+
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="pydantic")
 

@@ -1,3 +1,8 @@
+"""
+Based on the original implementation of paper "PRINCE: Provider-side Interpretability with Counterfactual Explanations in Recommender Systems"
+Original repository: https://github.com/azinmatin/prince
+"""
+
 import torch
 import numpy as np
 import pandas as pd

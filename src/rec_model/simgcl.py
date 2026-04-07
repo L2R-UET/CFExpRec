@@ -1,7 +1,12 @@
+'''
+Based on the original implementation of paper "Are Graph Augmentations Necessary? Simple Graph Contrastive Learning for Recommendation"
+Original repository: https://github.com/Coder-Yu/QRec
+'''
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from rec_model.base_model import GraphRecBaseModel
+from .base_model import GraphRecBaseModel
 
 class SimGCL(GraphRecBaseModel):
     def __init__(self, data_handler, device, args, config, **kwargs):

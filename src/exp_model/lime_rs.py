@@ -1,3 +1,9 @@
+'''
+Based on the original implementation of paper "Towards Explaining Recommendations Through Local Surrogate Models"
+and the implementation from the LXR repository: https://github.com/DeltaLabTLV/LXR
+Original repository: https://github.com/caionobrega/explaining-recommendations
+'''
+
 import torch
 import numpy as np
 import scipy as sp

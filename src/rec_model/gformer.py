@@ -1,4 +1,9 @@
-from rec_model.base_model import GraphRecBaseModel
+'''
+Based on the original implementation of paper "Graph Transformer for Recommendation"
+Original repository: https://github.com/HKUDS/GFormer
+'''
+
+from .base_model import GraphRecBaseModel
 import torch
 import torch.nn as nn
 import scipy.sparse as sp

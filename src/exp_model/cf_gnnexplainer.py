@@ -1,3 +1,8 @@
+'''
+Based on the original pseudo-code and implementation of paper "CF-GNNExplainer: Counterfactual Explanations for Graph Neural Networks".
+Original repository: https://github.com/a-lucic/cf-gnnexplainer
+'''
+
 import torch
 import torch.nn as nn
 import torch.optim as optim

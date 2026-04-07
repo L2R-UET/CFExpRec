@@ -1,3 +1,8 @@
+'''
+Based on the original implementation of paper "Counterfactual Explanations for Neural Recommenders"
+Original repository: https://github.com/hieptk/accent
+'''
+
 import torch
 import torch.nn.functional as F
 import numpy as np

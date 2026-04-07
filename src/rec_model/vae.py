@@ -1,8 +1,12 @@
+'''
+Based on the implementation in the LXR repository: https://github.com/DeltaLabTLV/LXR
+'''
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import json
-from rec_model.base_model import UserVectorRecBaseModel
+from .base_model import UserVectorRecBaseModel
 
 class VAE(UserVectorRecBaseModel):
     def __init__(self, data_handler, device, args, config=None, **kwargs):

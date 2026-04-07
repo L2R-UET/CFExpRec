@@ -1,11 +1,13 @@
+'''
+Based on the original implementation of paper "C2Explainer: Customizable Mask-based Counterfactual Explanation for Graph Neural Networks"
+Original repository: https://github.com/kano5266/C2Explainer
+'''
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.nn import Sequential, ReLU, Linear
 from tqdm import tqdm
-import math
 from .base_model import GraphExpBaseModel
-import numpy as np
 
 
 class C2Explainer(GraphExpBaseModel):

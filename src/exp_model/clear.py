@@ -1,3 +1,8 @@
+'''
+Based on the original implementation of paper "CLEAR: Generative Counterfactual Explanations on Graphs".
+Original repository: https://github.com/jma712/GraphCFE
+'''
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

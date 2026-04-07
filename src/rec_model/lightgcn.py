@@ -1,7 +1,11 @@
+'''
+Based on the original implementation of paper "LightGCN: Simplifying and Powering Graph Convolution Network for Recommendation"
+Original repository: https://github.com/gusye1234/LightGCN-PyTorch
+'''
+
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
-from rec_model.base_model import GraphRecBaseModel
+from .base_model import GraphRecBaseModel
 
 class LightGCN(GraphRecBaseModel):
     def __init__(self, data_handler, device, args, config, **kwargs):

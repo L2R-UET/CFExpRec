@@ -1,3 +1,8 @@
+'''
+Based on the original implementation of the paper "Learning and Evaluating Graph Neural Network Explanations based on Counterfactual and Factual Reasoning"
+Original repository: https://github.com/chrisjtan/gnn_cff
+'''
+
 import torch
 import torch.nn as nn
 from torch.optim import Adam

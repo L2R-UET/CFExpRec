@@ -1,9 +1,14 @@
+'''
+Based on the original implementation of paper "Diffusion Recommender Model"
+Original repository: https://github.com/yiyanxu/diffrec
+'''
+
 import math
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from rec_model.base_model import UserVectorRecBaseModel
+from .base_model import UserVectorRecBaseModel
 
 class ModelMeanType:
     START_X = 0

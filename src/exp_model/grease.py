@@ -1,3 +1,8 @@
+'''
+Based on the original implementation of paper "Joint Factual and Counterfactual Explanations for Top-k GNN-based Recommendations"
+Original repository: https://github.com/Mewtwo1996/GREASE
+'''
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

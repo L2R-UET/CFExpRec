@@ -1,3 +1,8 @@
+'''
+Based on the original implementation of paper "UNR-Explainer: Counterfactual Explanations for Unsupervised Node Representation Learning Models"
+Original repository: https://github.com/hjkng/unrexplainer
+'''
+
 import numpy as np
 import math
 import networkx as nx
