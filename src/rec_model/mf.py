@@ -49,4 +49,4 @@ class MF(UserVectorRecBaseModel):
             batch_history = self.apply_mask(batch_history, mask)
         user_vec = self.users_fc(batch_history)
         all_item_vec = self.item_fc.weight + self.item_bias
-        return torch.matmul(user_vec, all_item_vec.T)
+        return torch.sigmoid(torch.matmul(user_vec, all_item_vec.T))

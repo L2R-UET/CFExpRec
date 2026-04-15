@@ -1,4 +1,4 @@
 ﻿{
-    "alpha_prince":  0.15,
-    "epsilon":  8E-05
+    "alpha_prince": 0.15,
+    "epsilon": 1e-04
 }

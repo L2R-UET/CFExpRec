@@ -1,4 +1,5 @@
-﻿{
-    "n_samples":  null,
-    "n_clusters":  10
+{
+    "n_background": 50,
+    "nsamples": "auto",
+    "n_clusters": 10
 }

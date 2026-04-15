@@ -61,8 +61,6 @@ class LXR(UserVectorExpBaseModel):
         probs_pos = rec_model.predict(users=users, mask=pos_corrected)
         probs_neg = rec_model.predict(users=users, mask=neg_corrected)
 
-        probs_pos = torch.clamp(probs_pos, 1e-7, 1.0 - 1e-7)
-        probs_neg = torch.clamp(probs_neg, 1e-7, 1.0 - 1e-7)
 
         batch_indices = torch.arange(len(items_ids), device=items_ids.device)
         target_probs_pos = probs_pos[batch_indices, items_ids]

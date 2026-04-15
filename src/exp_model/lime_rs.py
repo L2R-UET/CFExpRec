@@ -157,9 +157,11 @@ class LIME_RS(UserVectorExpBaseModel):
         pert_tensor = torch.tensor(neighborhood_data, dtype=torch.float32, device=self.device)
         with torch.no_grad():
             user_tensor = torch.tensor([user_id], device=self.device, dtype=torch.long).expand(len(pert_tensor))
+            user_history = self.ui_mat[user_id].unsqueeze(0).expand_as(pert_tensor)
+            corrected = user_history * pert_tensor + (1 - user_history) * (1 - pert_tensor)
             neighborhood_labels = self.rec_model.predict(
                 users=user_tensor,
-                mask=[pert_tensor[i] for i in range(len(pert_tensor))]
+                mask=[corrected[i] for i in range(len(corrected))]
             )
             if neighborhood_labels.ndim == 2:
                 neighborhood_labels = neighborhood_labels.cpu().numpy()
@@ -228,5 +230,4 @@ class LIME_RS(UserVectorExpBaseModel):
         mask[..., history_indices] = 1.0
         scores_tensor = scores_tensor * mask
         scores_tensor += user_interaction * 1e-12
-
         return scores_tensor
