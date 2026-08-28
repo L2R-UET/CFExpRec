@@ -16,9 +16,9 @@ class CFGNNExplainer(GraphExpBaseModel):
     def __init__(self, model, device, args, config):
         super(CFGNNExplainer, self).__init__(model, device, args, config)
         self.mode = "explicit"
-        self.beta = getattr(config, "beta", 0.5)
-        self.lr = getattr(config, "lr", 1)
-        self.num_epochs = getattr(config, "num_epochs", 50)
+        self.beta = config.get("beta", 0.5)
+        self.lr = config.get("lr", 1)
+        self.num_epochs = config.get("num_epochs", 50)
 
     def get_explicit_explanation(self, user_id, item_ids, **kwargs):
         interaction = self.get_historical_interactions(user_id, item_ids, kwargs["graph_perturb"])

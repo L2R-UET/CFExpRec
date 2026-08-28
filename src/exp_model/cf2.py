@@ -14,9 +14,9 @@ class CF2(GraphExpBaseModel):
     def __init__(self, model, device, args, config):
         super(CF2, self).__init__(model, device, args, config)
         self.mode = "explicit"
-        self.lam = getattr(config, "lam", 500.)
-        self.lr = getattr(config, "lr", 0.5)
-        self.num_epochs = getattr(config, "num_epochs", 20)
+        self.lam = config.get("lam", 500.)
+        self.lr = config.get("lr", 0.5)
+        self.num_epochs = config.get("num_epochs", 20)
         self.relu = nn.ReLU()
 
     def _init_mask(self):

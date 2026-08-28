@@ -14,9 +14,9 @@ class UNRExplainer(GraphExpBaseModel):
         super(UNRExplainer, self).__init__(model, device, args, config)
 
         self.mode = "explicit"
-        self.c1 = getattr(config, "c1", 1.)
-        self.restart = getattr(config, "restart", 0.2)
-        self.max_iter = getattr(config, "max_iter", 500)
+        self.c1 = config.get("c1", 1.)
+        self.restart = config.get("restart", 0.2)
+        self.max_iter = config.get("max_iter", 500)
         self.top_k = args.top_k
 
         self.expansion_num = int(2 * self.ui_mat.sum() / (self.ui_mat.size(0) + self.ui_mat.size(1)))
