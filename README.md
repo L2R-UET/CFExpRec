@@ -53,7 +53,7 @@ The codebase supports multiple recommendation backbones and explanation models a
 ```
 
 ## Dataset
-Three datasets (Amazon, ML1M, Pinterest) used in the study are available in the folder ```./processed_data```. The datasets are preprocessed and ready to use. For ML1M and Pinterest, we follow the data preprocessing code in the [LXR repository](https://github.com/DeltaLabTLV/LXR). For Amazon, we include the data preprocessing code in ```./processed_data/Amazon/preprocessing.ipynb``` file.
+Three datasets (Amazon, ML1M, Yahoo) used in the study are available in the folder ```./processed_data```. The datasets are preprocessed and ready to use. For ML1M and Pinterest, we follow the data preprocessing code in the [LXR repository](https://github.com/DeltaLabTLV/LXR). For Amazon, we include the data preprocessing code in ```./processed_data/Amazon/preprocessing.ipynb``` file.
 
 Each dataset contains a file named ```interaction.csv``` to store user-item interaction, with each row (user_id, item_id) corresponding to an interaction.
 
